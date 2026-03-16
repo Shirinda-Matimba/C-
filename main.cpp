@@ -2,6 +2,7 @@
 #include <string>
 using namespace std;
 
+# Restaurant Application
 class User
 {
 public:
