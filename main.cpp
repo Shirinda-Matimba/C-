@@ -1,187 +1,227 @@
 #include <iostream>
-#include <string>
+#include <fstream>
 using namespace std;
 
-# Restaurant Application
 class User
 {
+protected:
+    string first_name,last_name,address,username,password,phone_number;
 public:
-    void User_details()
+    int option;
+    void setFirst_name(string f)
     {
-        cout << "The details of the user\n";
+        first_name = f;
     }
-};
-
-class Name: public User
-{
-    public:
-    void User_Name()
+    string getfirst_name()
     {
-        cout << "Name: Matimba\n";
+        return first_name;
     }
-
-};
-
-class Password: public User
-{
-    public:
-    void User_Password()
+    void setLast_name(string l)
     {
-        cout << "Password: Shirinda@97\n";
+        last_name = l;
     }
-};
-
-class address: public User
-{
-    public:
-    void User_address()
+    string getLast_name()
     {
-        cout << "adress: Vanderbijlpark CW 1900\n";
+        return last_name;
     }
-};
-
-class City: public User
-{
-    public:
-    void User_City()
+    void setAddress(string a)
     {
-        cout << "City: Gauteng\n";
+        address = a;
     }
-};
-
-
-class Cell_Number: public User
-{
-    public:
-    void User_Cell_Number()
+    string getAddress()
     {
-        cout << "Cell_Number: 0817640684\n";
+        return address;
     }
+    void setUsername(string u)
+    {
+        username = u;
+    }
+    string getUsername()
+    {
+        return username;
+    }
+    void setPassword(string p)
+    {
+        password = p;
+    }
+    string getPassword()
+    {
+        return password;
+    }
+    void setPhone_number(string p)
+    {
+        phone_number = p;
+    }
+    string getPhone_number()
+    {
+        return phone_number;
+    }
+    void userlogin();
+    void custprofile();
 };
-
-void kfc()
+class Order
 {
-    cout << "1. dunked_wings \t R49.00\n";
-    cout << "2. zinger_wings \t R70.59\n";
+public:
+    string receipt;
+    int balance = 0.0;
+    double t_shirt = 100;
+    double Short = 200;
+    double top = 100;
+    double skirt = 100;
+
+    void addCart();
+    void displayItems();
+    void confirmOrder();
+};
+void Order::addCart()
+{
+    User myUser;
+    Order myOrder;
+    int category;
+    string yes, no;
+
+    do{
+    cout << "category for men and woman wears" <<endl;
+    cout << "1. T-shirt     R100" <<endl;
+    cout << "2. Short       R200" <<endl;
+    cout << "3. Top         R100" <<endl;
+    cout << "4. Skirt       R100" <<endl;
+    cout << "Enter your category number to add any type: "<<endl;
+    cin >>category;
+    if(category == 1)
+    {
+        cout << "t-shirt of R100 is added to the chart" <<endl;
+        myOrder.confirmOrder();
+    }else if(category == 2)
+    {
+        cout << "short of R200 is added to the chart" <<endl;
+        myOrder.confirmOrder();
+    }else if(category == 3)
+    {
+        cout << "top of R100 is added to the chart" <<endl;
+        myOrder.confirmOrder();
+    }else if(category == 4)
+    {
+        cout << "skirt of R100 is added to the chart" <<endl;
+        myOrder.confirmOrder();
+    }
+}while(category == 0);
 }
-void nandos()
+void Order::displayItems()
 {
-    cout << "1. half_chicken \t R50.00\n";
-    cout << "2. full_chicken \t R95.90\n";
+    cout << "Category     Type        Price" <<endl;
+    cout << "Men wears    T-shirt     R100" <<endl;
+    cout << "             Short       R200" <<endl;
+    cout << "Men wears    Top         R100" <<endl;
+    cout << "             Skirt       R100" <<endl;
+}
+void Order::confirmOrder()
+{
+    User myUser;
+    Order myOrder;
+    string yes, no;
+
+    cout << "Do you want to confirm your order?yes/no: " <<endl;
+      if(yes == "yes")
+        {
+            cout << "Thank your receipt is printed on the text file" <<endl;
+        }else if(yes == "no")
+        {
+            cout << "Add category type to the cart" <<endl;
+        }
+    cin >> myUser.option;
+    fstream mywrite("slipe.txt",ios::app);
+    mywrite.close();
+}
+void User::userlogin()
+{
+    User myUser;
+    Order myOrder;
+
+    ofstream mytext("receipt.txt",ios::app);
+
+    cout << "Enter your username: " <<endl;
+    cin >>username;
+    cout << "Enter your password: " <<endl;
+    cin >>password;
+    if (username == "username" && password == "password")
+    {
+        do{
+        cout << "'''''''Item menu'''''''"<<endl;
+        cout << "1 to addCart" <<endl;
+        cout << "2 to displayItems" <<endl;
+        cout << "3 to confirmOrder" <<endl;
+        cout << "4 Exit" <<endl;
+        cout << "Select your Item: "<<endl;
+        cin >> myUser.option;
+        switch(myUser.option)
+        {
+        case 1:
+            myOrder.addCart();
+            break;
+        case 2:
+            myOrder.displayItems();
+        case 3:
+            myOrder.confirmOrder();
+            break;
+        }
+        }while(myUser.option == 4);
+
+    }else
+    {
+        cout << "Try again"<<endl;
+    }
+
+    /*string text;
+    ifstream myfile("User_Details.txt");
+    while(getline(myfile,text))
+    {
+        cout << text << '\n'<<endl;
+    }
+    myfile.close();*/
+
 }
 int main()
 {
-    int choice;
-    double half_chicken = 50;
-    double full_chicken = 95.90;
-    double dunked_wings = 49.00;
-    double zinger_wings = 70.59;
-    int balance = 00.00;
-
-
-    User myUser_details;
-    Name myUser_Name;
-    Password myUser_Password;
-    address myUser_address;
-    City myUser_City;
-    Cell_Number myUser_Cell_Number;
-
-    myUser_details.User_details();
-    myUser_Name.User_Name();
-    myUser_Password.User_Password();
-    myUser_address.User_address();
-    myUser_City.User_City();
-    myUser_Cell_Number.User_Cell_Number();
-
-
-   void nandos();
-   void kfc();
-
-   do{
-
-
-   cout << "1. nandos\n";
-   cout << "2. kfc\n";
-   cout << "3. exit\n";
-   cout << "enter your choice: ";
-   cin >> choice;
-
-   if(choice == 1)
-   {
-      nandos();
-      cout << "place your order: ";
-      cin >> choice;
-      if(choice == 1)
-      {
-          cout << "enter amount to order a half_chicken: ";
-          double half_chicken;
-          cin >> half_chicken;
-          balance += half_chicken;
-
-          if(half_chicken > 50)
-          {
-              cout << "you have ordered your half_chicken\n";
-              cout << "press any key to return to the menu: ";
-              cin >> choice;
-          }else if(half_chicken < 50)
-          {
-              cout << "insufient fund\n";
-              cout << "press any key to return to the menu: ";
-              cin >> choice;
-          }
-      }else if(choice == 2)
-      {
-          cout << "enter amount to order a full_chicken: ";
-          double full_chicken;
-          cin >> full_chicken;
-          balance += full_chicken;
-
-          if(full_chicken > 95.90)
-          {
-              cout << "you have ordered your full_chicken\n";
-              cout << "press any key to return to the menu: ";
-              cin >> choice;
-          }else if(full_chicken < 95.90)
-          {
-              cout << "insufient fund\n";
-              cout << "press any key to return to the menu: ";
-              cin >> choice;
-          }
-
-      }
-
-   }if(choice == 2)
-   {
-      kfc();
-      cout << "place your order: ";
-      cin >> choice;
-      if(choice == 1)
-      {
-          cout << "enter amount to order a dunken_wings: ";
-          double dunken_wings;
-          cin >> dunken_wings;
-          balance += dunken_wings;
-
-          if(dunken_wings > 49)
-          {
-              cout << "you have ordered your dunken_wings\n";
-              cout << "press any key to return to the menu: ";
-              cin >> choice;
-          }else if(dunken_wings < 49)
-          {
-              cout << "insufient fund\n";
-              cout << "press any key to return to the menu: ";
-              cin >> choice;
-
-          }if(choice == 2)
-          {
-              cout << "enter amount to order a zinger_wings: ";
-
-          }
-      }
-   }
-}while(choice !=3);
-
+    User myUser;
+    do{
+    cout << "welcome" << endl;
+    cout << "1. to login" << endl;
+    cout << "2. to sign up" << endl;
+    cout << "3. Exit" << endl;
+    cout << "select option: " << endl;
+    cin >>myUser.option;
+    switch(myUser.option)
+    {
+    case 1:
+        myUser.userlogin();
+        break;
+    case 2:
+        myUser.custprofile();
+        break;
+    case 3:
+        break;
+    }
+    }while(myUser.option == 4);
     return 0;
-
 }
+void User::custprofile()
+{
+    cout << "Enter your first-name: " <<endl;
+    cin >> first_name;
+    cout << "Enter your last-name: " <<endl;
+    cin >> last_name;
+    cout << "Enter your address: " <<endl;
+    cin >> address;
+    cout << "Enter your username: " <<endl;
+    cin >> username;
+    cout << "Enter your password: " <<endl;
+    cin >> password;
+    cout << "Enter your phone-number: " <<endl;
+    cin >> phone_number;
+    ofstream myfile("User_Details.txt",ios::app);
+    myfile <<"First-name: "<<(first_name)<<'\n'<<"Last-name: "<<(last_name)<<'\n'<<"Address: "<<(address)<<'\n'<<"Username: "<<(username)<<'\n'<<"Password: "<<(password)<<'\n'<<"Phone-number: "<<(phone_number)<<'\n'<<endl;
+    cout << "Your profile is created" <<endl;
+    myfile.close();
+}
+
